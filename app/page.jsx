@@ -7,7 +7,7 @@ async function getData(url) {
 }
 
 export default async function Home() {
-  const data = await getData("https://pokeapi.co/api/v2/pokemon?limit=25");
+  const data = await getData("https://pokeapi.co/api/v2/pokemon?limit=15");
   const firtData = data.results;
 
   return (
