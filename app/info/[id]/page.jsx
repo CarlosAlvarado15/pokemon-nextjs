@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 
@@ -18,11 +19,11 @@ async function page({ params }) {
         alignItems: "center",
         flexDirection: "column",
         height: "100vh",
-        color: "white",
+        color: "black",
         fontSize: "30px",
       }}
     >
-      <h1 style={{ color: "white", fontSize: "50px", color: "red" }}>
+      <h1 style={{ color: "black", fontSize: "50px", color: "red" }}>
         Elegiste
       </h1>
       <h1 style={{ fontSize: "60px" }}>Name: {data.name}</h1>

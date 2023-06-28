@@ -1,3 +1,6 @@
+"use client";
+import React, { useState, useEffect } from "react";
+import { CircularProgress } from "@mui/material";
 import Link from "next/link";
 
 async function getData(url) {
@@ -7,10 +10,38 @@ async function getData(url) {
   return data;
 }
 
-async function CardPokemon({ url }) {
-  const dataPokemon = await getData(url);
+function CardPokemon({ url }) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [dataPokemon, setDataPokemon] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const data = await getData(url);
+        setDataPokemon(data);
+      } catch (error) {
+        console.log(error);
+        // Handle error state or display an error message
+      } finally {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1000); // 1000 milliseconds (1 second) delay
+      }
+    };
+
+    fetchData();
+  }, [url]);
+
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+
+  if (!dataPokemon) {
+    return <div>Loading...</div>;
+  }
+
   const imagePokemon = dataPokemon.sprites.front_default;
-  // console.log();
 
   return (
     <Link href={`info/${dataPokemon.id}`}>
